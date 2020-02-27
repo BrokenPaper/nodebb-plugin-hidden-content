@@ -12,9 +12,9 @@
     };
 
     Filters.composerHelp = function (helpText, callback) {
-        helpText += '<h2>Spoiler</h2>';
-        helpText += 'To hide content you could use spoilers:';
-        helpText += '\n<pre>\n:::\n\nspoiler content, will be hidden under interactive button\n\n:::</pre>';
+        helpText += '<h2>折叠</h2>';
+        helpText += '可以使用折叠隐藏部分内容:';
+        helpText += '\n<pre>\n:::\n\ns要折叠的内容,点击按钮后才可见\n\n:::</pre>';
         callback(null, helpText);
     };
 

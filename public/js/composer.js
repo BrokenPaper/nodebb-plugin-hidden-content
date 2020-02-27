@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     var tag    = ':::',
         nl     = '\n\n',
-        textPrompt = 'Spoiler Text';
+        textPrompt = '折叠内容';
 
     $(window).on('action:composer.loaded', function (ev, data) {
         if ($.Redactor && $.Redactor.opts.plugins.indexOf('ns-spoiler') === -1) {
