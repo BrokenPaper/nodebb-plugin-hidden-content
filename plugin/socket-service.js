@@ -17,7 +17,7 @@
 
     SocketService.getSpoilerContent = function (socket, payload, callback) {
         if (!socket.uid) {
-            return callback(new Error('Connection is not authorized.'));
+            return callback(new Error('你需要先登录.'));
         }
 
         controller.getSpoilerContent(Object.assign({}, {uid: socket.uid}, payload), callback);

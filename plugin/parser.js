@@ -8,6 +8,7 @@
 
     var spoiler = cloneRegexp(constants.REG_SPOILER);
 
+    // 这是获得内容,如果前面都没问题的话
     Parser.getContentAt = function (content, index, done) {
         async.waterfall([
             async.apply(Parser.prepare, content),
@@ -15,6 +16,7 @@
                 var spoilerContent;
                 spoiler.lastIndex = index;
                 spoilerContent = spoiler.exec(sanitizedContent);
+
                 if (spoilerContent) {
                     next(null, spoilerContent[1]);
                 } else {
@@ -24,6 +26,7 @@
         ], done);
     };
 
+    // 这是给隐藏的内容加上一个按钮,这边不需要按钮,就显示被隐藏了就行了
     Parser.parse = function (content, done) {
         async.waterfall([
             async.apply(Parser.prepare, content),
@@ -34,7 +37,7 @@
                 // If there is a Spoiler in the content, content will be shattered on the chunks
                 while ((execResult = spoiler.exec(sanitizedContent)) !== null) {
                     textSegments[cursor] = sanitizedContent.slice(position, execResult.index);
-                    textSegments[++cursor] = `<div class="ns-spoiler" data-index="${execResult.index}" data-open="false"><div class="ns-spoiler-control"><a class="btn btn-default" href="#"><i class="fa fa-eye"></i> 折叠内容</a></div><div class="ns-spoiler-content"></div></div>`;
+                    textSegments[++cursor] = `<div class="hidden-content" data-index="${execResult.index}" data-open="false"><div class="hidden-content-control"><a class="btn btn-default" href="#"><i class="fa fa-lock"></i> 回复后点击显示</a></div><div class="hidden-content-content"></div></div>`;
                     // Rest content
                     textSegments[++cursor] = sanitizedContent.slice(spoiler.lastIndex);
                     position = spoiler.lastIndex;

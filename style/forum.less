@@ -1,30 +1,32 @@
 // No nesting for main components,
 // for easy style override
-.ns-spoiler {
+.hidden-content{
   &[data-open='false'] {
-    .ns-spoiler-content {
+    .hidden-content-content {
       display: none;
     }
   }
   &[data-open='true'] {
-    .ns-spoiler-content {
+    .hidden-content-content {
       display: block;
     }
   }
+  
+  margin-bottom: 10px;
 }
 
-.ns-spoiler-control {
+.hidden-content-control {
   a {
     padding: 4px 8px;
   }
 }
 
-.ns-spoiler-content {
+.hidden-content-content {
   border-left: 2pt solid #eeeeee;
   padding-left: 8px;
   margin-top: 8px;
 }
 
-.ns-spoiler + .ns-spoiler {
+.hidden-content+ .hidden-content{
   margin-top: 8px;
 }

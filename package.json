@@ -1,5 +1,5 @@
 {
-  "name": "nodebb-plugin-ns-spoiler",
+  "name": "nodebb-plugin-hidden-content",
   "version": "7.0.0",
   "description": "Spoiler. Ability to control visibility of the content in posts. Works better with Markdown syntax.",
   "main": "./plugin/index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NicolasSiver/nodebb-plugin-ns-spoiler.git"
+    "url": "git+https://github.com/BrokenPaper/nodebb-plugin-hidden-content.git"
   },
   "keywords": [
     "spoiler",
@@ -19,9 +19,9 @@
   "author": "Nicolas Siver",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/NicolasSiver/nodebb-plugin-ns-spoiler/issues"
+    "url": "https://github.com/BrokenPaper/nodebb-plugin-hidden-content.git/issues"
   },
-  "homepage": "https://github.com/NicolasSiver/nodebb-plugin-ns-spoiler#readme",
+  "homepage": "https://github.com/BrokenPaper/nodebb-plugin-hidden-content.git#readme",
   "nbbpm": {
     "compatibility": "~1.12.0"
   },
