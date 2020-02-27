@@ -43,8 +43,8 @@ require(['forum/topic/images', 'translator'], function(images, translator) {
       socket.emit('plugins.hidden-content.getSpoilerContent', { index: index, postId: postId }, function(error, content) {
         if (error) {
           
-          app.alertError(  error.message);
-          //return console.error('Error has occurred, error: %s', error.message)
+          app.alertError(error.message)
+          return;
 
 
         }
