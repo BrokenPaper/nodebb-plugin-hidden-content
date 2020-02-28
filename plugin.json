@@ -19,10 +19,6 @@
       "priority": 7
     },
     {
-      "hook": "filter:post.create",
-      "method": "hooks.filters.setReplyerId"
-    },
-    {
       "hook": "static:app.load",
       "method": "hooks.statics.appLoad"
     }

@@ -23,8 +23,5 @@
     controller.parsePost(payload, callback)
   }
 
-  Filters.setReplyerId = function(data, callback) {
-    console.log("get")
-    controller.setReplyerId(data, callback)
-  }
+
 })(module.exports)

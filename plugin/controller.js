@@ -25,25 +25,22 @@
         // Trigger parsing process
         function chainParse(post, next) {
           post[constants.PARSE_REJECT_TOKEN] = true
-
           nodebb.plugins.fireHook('filter:parse.post', { postData: post }, function(error, hookResult) {
             if (error) {
               return next(error)
             }
-
             next(null, hookResult.postData)
           })
         },
-
         function checkReply(post, next) {
-          nodebb.topics.getTopicData(post.tid, function(err, fields) {
-            if (!fields.replyerIds) {
-              // 只有老帖才会触发这个把
-              return next(new Error('你需要回复才能查看隐藏的内容'))
+          // 折腾了半天终于找到最方便的方法了
+          nodebb.db.isSortedSetMember('tid:' + post.tid + ':posters', payload.uid, function(error, data) {
+            if (error) {
+              return next(error)
             }
-
-            if (fields.replyerIds.indexOf(payload.uid) === -1) {
-              return next(new Error('你需要回复才能查看隐藏的内容'))
+            // Need Translate
+            if (data === false) {
+              return next(new Error('你没有回复过'))
             }
 
             next(null, post)
@@ -57,6 +54,10 @@
     )
   }
 
+  Controller.hasReplied = async function(tid, uid) {
+    //return nodebb.db.getObject('tid:' + tid + ':posters",value:"' + uid)
+    return await nodebb.db.getSortedSetRevRangeByScore('tid:' + tid + ':posters', 0, -1, '+inf', 1)
+  }
   // 新加载的帖子会被这里处理,已有的帖子不会被处理,太强了!
   // 不过这只是给新帖子加上被隐藏的标识而已
   /**
@@ -79,18 +80,5 @@
       // Skip hook chain if reject token is set
       callback(null, payload)
     }
-  }
-
-  // 参考reply to see,这个在发帖的时候就会给自己加入到里面去
-  Controller.setReplyerId = function(payload, callback) {
-    nodebb.topics.getTopicData(parseInt(payload.data.tid), function(err, fields) {
-      var replyerIds = fields.replyerIds ? JSON.parse(fields.replyerIds.toString()) : []
-
-      if ( replyerIds.indexOf(payload.data.uid)===-1) {
-        replyerIds.push(parseInt(payload.data.uid))
-        nodebb.topics.setTopicField(parseInt(payload.data.tid), 'replyerIds', JSON.stringify(replyerIds))
-      }
-    })
-    callback(null, payload)
   }
 })(module.exports)
