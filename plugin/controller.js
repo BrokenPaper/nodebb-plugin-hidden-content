@@ -84,8 +84,9 @@
   // 参考reply to see,这个在发帖的时候就会给自己加入到里面去
   Controller.setReplyerId = function(payload, callback) {
     nodebb.topics.getTopicData(parseInt(payload.data.tid), function(err, fields) {
-      var replyerIds = fields.replyerIds ? fields.replyerIds : []
-      if (replyerIds.indexOf(payload.data.uid) === -1) {
+      var replyerIds = fields.replyerIds ? JSON.parse(fields.replyerIds.toString()) : []
+
+      if ( replyerIds.indexOf(payload.data.uid)===-1) {
         replyerIds.push(parseInt(payload.data.uid))
         nodebb.topics.setTopicField(parseInt(payload.data.tid), 'replyerIds', JSON.stringify(replyerIds))
       }
