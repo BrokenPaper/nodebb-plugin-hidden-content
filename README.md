@@ -1,3 +1,8 @@
+# Notice
+This plugin is a fork from nodebb-plugin-ns-spoiler,I want to call it 'reply to see',But this plugin is already exist,I made it for myself,so I haven't translated it into English.
+
+这个插件跟nodebb-plugin-ns-spoiler差不多，不过必须要回复之后才能点击那个折叠按钮，相当于部分内容回复可见
+
 # NodeBB: Spoiler
 
 Spoiler. Ability to control visibility of the content in posts. Works better with Markdown syntax.
